@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<title>MVC-Reservation</title>
+<!--  style css du site -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel='stylesheet' id='bootstrap-style-css'  href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css?ver=5.9' type='text/css' media='all' />
+<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js?ver=5.9' id='bootstrap-js-js'></script>
+
+	<!--bibliotheque jquery  -->
+	<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <script LANGUAGE="javascript">
+    jQuery(document).ready(function () {
+      jQuery(".verif_form_livre").submit(function (event) {
+        event.preventDefault();
+        console.log(jQuery(this).attr("action"), jQuery(this).serialize());
+        jQuery.post(jQuery(this).attr("action"), jQuery(this).serialize(), function (data) {
+          console.log(data);
+          var jQuerye = jQuery("#messagee");
+          // traitement  exécuter une fois le formulaire posté.
+          //data est sous la forme: insert (voir verifController.php)
+          var ok = data.substr(0, 6);
+          var token = data.substr(3, data.length);
+          if (ok == "insert") {
+            console.log(data);
+            //TODO implementer le retour assynchrone de la validation du formulaire
+          } else {
+            jQuerye.html(data).show();
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
